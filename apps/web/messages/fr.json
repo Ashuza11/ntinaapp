@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "discover": "Découvrir",
+    "record": "Enregistrer",
+    "review": "Valider",
+    "profile": "Profil"
+  },
+  "discover": {
+    "searchPlaceholder": "Rechercher des sujets...",
+    "topExplanations": "Meilleures explications de la semaine",
+    "verified": "Vérifié"
+  },
+  "record": {
+    "holdToRecord": "Maintenez pour enregistrer",
+    "localAnalogy": "Analogie locale"
+  },
+  "review": {
+    "approve": "Approuver",
+    "needsEdit": "À modifier",
+    "flag": "Signaler"
+  }
+}

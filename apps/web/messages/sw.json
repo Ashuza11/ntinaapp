@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "discover": "Gundua",
+    "record": "Rekodi",
+    "review": "Kagua",
+    "profile": "Wasifu"
+  },
+  "discover": {
+    "searchPlaceholder": "Tafuta mada...",
+    "topExplanations": "Maelezo Bora ya Wiki Hii",
+    "verified": "Imethibitishwa"
+  },
+  "record": {
+    "holdToRecord": "Shikilia Kurekodi",
+    "localAnalogy": "Mfano wa Karibu"
+  },
+  "review": {
+    "approve": "Kubali",
+    "needsEdit": "Inahitaji Marekebisho",
+    "flag": "Ripoti"
+  }
+}

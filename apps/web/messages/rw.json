@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "discover": "Shakisha",
+    "record": "Fata",
+    "review": "Suzuma",
+    "profile": "Umwirondoro"
+  },
+  "discover": {
+    "searchPlaceholder": "Shakisha ibisomo...",
+    "topExplanations": "Ibisobanuro Byiza bya Iki Cyumweru",
+    "verified": "Byemejwe"
+  },
+  "record": {
+    "holdToRecord": "Shikama Gufata",
+    "localAnalogy": "Urugero rw'Akarere"
+  },
+  "review": {
+    "approve": "Emeza",
+    "needsEdit": "Bisaba Guhindurwa",
+    "flag": "Tangaza"
+  }
+}

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-terracotta: #c4633a;
+  --color-forest: #2d5a27;
+  --color-gold: #d4a017;
+  --color-cream: #faf7f2;
+}
+
+/* Improve readability on low-quality screens */
+body {
+  @apply bg-cream text-gray-900 antialiased;
+  font-size: 16px;
+  min-height: 100dvh;
+}
+
+/* High-contrast focus rings for accessibility */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-gold;
+}

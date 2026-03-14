@@ -1,0 +1,70 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  # ─── Deploy Web (PWA) ────────────────────────────────────────────────────
+  deploy-web:
+    name: Deploy Web
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web
+        run: pnpm --filter @ntina/web build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
+      # TODO: Add your chosen deployment (Vercel, Railway, Fly.io, etc.)
+      - name: Deploy web (placeholder)
+        run: echo "Configure DEPLOY_TOKEN and deployment target in repository secrets"
+
+  # ─── Deploy API ──────────────────────────────────────────────────────────
+  deploy-api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build API
+        run: |
+          pnpm --filter @ntina/shared build
+          pnpm --filter @ntina/api build
+        env:
+          NODE_ENV: production
+
+      # TODO: Add your chosen deployment (Railway, Fly.io, AWS ECS, etc.)
+      - name: Deploy API (placeholder)
+        run: echo "Configure DEPLOY_TOKEN and deployment target in repository secrets"

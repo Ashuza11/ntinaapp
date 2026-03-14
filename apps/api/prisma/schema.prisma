@@ -1,0 +1,152 @@
+// Ntina — Database Schema
+// Managed with Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  LEARNER
+  TEACHER
+  REVIEWER
+  ADMIN
+}
+
+enum ContentStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  NEEDS_EDIT
+  FLAGGED
+  REJECTED
+}
+
+enum ReviewVerdict {
+  APPROVE
+  NEEDS_EDIT
+  FLAG
+}
+
+enum Language {
+  SW // Kiswahili
+  RW // Kinyarwanda
+  FR // French
+  EN // English
+}
+
+enum Domain {
+  STEM
+  ECONOMICS
+  ENVIRONMENT
+  HISTORY
+  OTHER
+}
+
+// ─── Models ──────────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String    @unique
+  displayName   String
+  avatarUrl     String?
+  bio           String?
+  role          UserRole  @default(LEARNER)
+  preferredLang Language  @default(SW)
+  points        Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  recordings Recording[]
+  reviews    Review[]
+  badges     UserBadge[]
+
+  @@map("users")
+}
+
+model Concept {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  domain    Domain
+  termSw    String? // Kiswahili term
+  termRw    String? // Kinyarwanda term
+  termFr    String? // French term
+  termEn    String // English term (canonical)
+  keyFacts  String[] // Bullet points shown during recording
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  recordings Recording[]
+
+  @@map("concepts")
+}
+
+model Recording {
+  id              String        @id @default(cuid())
+  title           String
+  audioUrl        String
+  audioDuration   Int // seconds
+  language        Language
+  status          ContentStatus @default(DRAFT)
+  localAnalogy    String? // The "X-Factor" analogy section
+  illustrationUrl String?
+  playCount       Int           @default(0)
+
+  teacherId String
+  teacher   User    @relation(fields: [teacherId], references: [id])
+  conceptId String
+  concept   Concept @relation(fields: [conceptId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  reviews Review[]
+
+  @@map("recordings")
+}
+
+model Review {
+  id        String        @id @default(cuid())
+  verdict   ReviewVerdict
+  note      String?
+  createdAt DateTime      @default(now())
+
+  reviewerId  String
+  reviewer    User      @relation(fields: [reviewerId], references: [id])
+  recordingId String
+  recording   Recording @relation(fields: [recordingId], references: [id])
+
+  @@unique([reviewerId, recordingId])
+  @@map("reviews")
+}
+
+model Badge {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String
+  iconUrl     String?
+  threshold   Int // points required to earn
+
+  users UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id])
+  badge Badge @relation(fields: [badgeId], references: [id])
+
+  @@id([userId, badgeId])
+  @@map("user_badges")
+}

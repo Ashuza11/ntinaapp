@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "discover": "Discover",
+    "record": "Record",
+    "review": "Review",
+    "profile": "Profile"
+  },
+  "discover": {
+    "searchPlaceholder": "Search topics...",
+    "topExplanations": "Top Explanations of the Week",
+    "verified": "Verified"
+  },
+  "record": {
+    "holdToRecord": "Hold to Record",
+    "localAnalogy": "Local Analogy"
+  },
+  "review": {
+    "approve": "Approve",
+    "needsEdit": "Needs Edit",
+    "flag": "Flag"
+  }
+}
