@@ -1,5 +1,9 @@
 import type { NextConfig } from 'next'
-import withPWA from 'next-pwa'
+import createNextIntlPlugin from 'next-intl/plugin'
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const withPWA = require('next-pwa')
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const pwaConfig = withPWA({
   dest: 'public',
@@ -9,7 +13,6 @@ const pwaConfig = withPWA({
 })
 
 const nextConfig: NextConfig = {
-  // Enable React strict mode for better development experience
   reactStrictMode: true,
 
   // Optimize images for low-bandwidth
@@ -17,11 +20,6 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
   },
-
-  // i18n handled by next-intl middleware
-  experimental: {
-    typedRoutes: true,
-  },
 }
 
-export default pwaConfig(nextConfig)
+export default pwaConfig(withNextIntl(nextConfig))

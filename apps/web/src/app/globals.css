@@ -20,3 +20,71 @@ body {
 *:focus-visible {
   @apply outline-2 outline-offset-2 outline-gold;
 }
+
+/* Waveform bar animation */
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 20px; }
+}
+
+@keyframes wave-tall {
+  0%, 100% { height: 6px; }
+  50% { height: 28px; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes recording-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.5); }
+  50% { box-shadow: 0 0 0 20px rgba(212, 160, 23, 0); }
+}
+
+.waveform-bar {
+  animation: wave 0.8s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.waveform-bar-tall {
+  animation: wave-tall 0.8s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+.waveform-bar:nth-child(1) { animation-delay: 0s; }
+.waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+.waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+.waveform-bar:nth-child(4) { animation-delay: 0.05s; }
+.waveform-bar:nth-child(5) { animation-delay: 0.15s; }
+.waveform-bar:nth-child(6) { animation-delay: 0.25s; }
+.waveform-bar:nth-child(7) { animation-delay: 0.08s; }
+.waveform-bar:nth-child(8) { animation-delay: 0.18s; }
+.waveform-bar:nth-child(9) { animation-delay: 0.28s; }
+.waveform-bar:nth-child(10) { animation-delay: 0.12s; }
+.waveform-bar:nth-child(11) { animation-delay: 0.22s; }
+.waveform-bar:nth-child(12) { animation-delay: 0.32s; }
+
+.waveform-bar-tall:nth-child(1) { animation-delay: 0s; }
+.waveform-bar-tall:nth-child(2) { animation-delay: 0.08s; }
+.waveform-bar-tall:nth-child(3) { animation-delay: 0.16s; }
+.waveform-bar-tall:nth-child(4) { animation-delay: 0.04s; }
+.waveform-bar-tall:nth-child(5) { animation-delay: 0.12s; }
+.waveform-bar-tall:nth-child(6) { animation-delay: 0.2s; }
+.waveform-bar-tall:nth-child(7) { animation-delay: 0.06s; }
+.waveform-bar-tall:nth-child(8) { animation-delay: 0.14s; }
+.waveform-bar-tall:nth-child(9) { animation-delay: 0.22s; }
+.waveform-bar-tall:nth-child(10) { animation-delay: 0.1s; }
+.waveform-bar-tall:nth-child(11) { animation-delay: 0.18s; }
+.waveform-bar-tall:nth-child(12) { animation-delay: 0.26s; }
+.waveform-bar-tall:nth-child(13) { animation-delay: 0.03s; }
+.waveform-bar-tall:nth-child(14) { animation-delay: 0.11s; }
+.waveform-bar-tall:nth-child(15) { animation-delay: 0.19s; }
+
+.recording-btn-pulse {
+  animation: recording-pulse 1.5s ease-in-out infinite;
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s ease-out infinite;
+}
